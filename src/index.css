@@ -249,17 +249,53 @@ a {
   margin-bottom: 60px;
 }
 
-.vanPg-tagElement {
+.van-type {
   padding: 8px 16px;
   margin-right: 16px;
   border-radius: 5px;
   background: #ffead0;
+  border: none;
+}
+/* 
+.simple {
+  background-color: #e17654;
+}
+
+.rugged {
+  background-color: #115e59;
+}
+
+.luxury {
+  background-color: #161616;
+} */
+
+.van-type:hover, .vanPg-tagElementClear:hover , .van-type.selected{
+  color: #FFEAD0;
+}
+
+.van-type.simple:hover, .simple.selected {
+  background-color: #e17654;
+}
+
+.van-type.rugged:hover, .rugged.selected {
+  background-color: #115e59;
+}
+
+.van-type.luxury:hover, .luxury.selected {
+  background-color: #161616;
 }
 
 .vanPg-tagElementClear {
+  background: transparent;
+  border: none;
+  border-radius: 5px;
   padding: 8px 16px;
   color: #4d4d4d;
   text-decoration: underline;
+}
+
+.vanPg-tagElementClear.luxury:hover {
+  background-color: #161616;
 }
 
 .vanPg-cardContainer {
@@ -319,17 +355,7 @@ a {
   border-radius: 10px;
 }
 
-.simple {
-  background-color: #e17654;
-}
 
-.rugged {
-  background-color: #115e59;
-}
-
-.luxury {
-  background-color: #161616;
-}
 
 /* --------------vanDetailPg-------------- */
 

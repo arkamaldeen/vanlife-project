@@ -16,9 +16,9 @@ function Vans() {
 
     }, []);
 
-    const displayedVans = typeFilter 
-    ? vans.filter(van => van.type === typeFilter)
-    : vans
+    const displayedVans = typeFilter
+        ? vans.filter(van => van.type === typeFilter)
+        : vans
 
     const vanElements = displayedVans.map(van => (
         <div key={van.id} className="vanPg-card">
@@ -28,7 +28,7 @@ function Vans() {
                     <h3>{van.name}</h3>
                     <p>${van.price}<span>/day</span></p>
                 </div>
-                <div className={`vanType ${van.type}`}>{van.type}</div>
+                <div className={`vanType ${van.type} selected`}>{van.type}</div>
             </Link>
         </div>
     ));
@@ -39,10 +39,17 @@ function Vans() {
             <section>
                 <h1 className="vanPg-title">Explore our van options</h1>
                 <div className="vanPg-tagDiv">
-                    <div className="vanPg-tagElement">Simple</div>
-                    <div className="vanPg-tagElement">Luxury</div>
-                    <div className="vanPg-tagElement">Rugged</div>
-                    <div className="vanPg-tagElementClear">Clear filters</div>
+                    
+                        <button onClick={() => setSearchParams({type: "simple"})} className="van-type simple ">Simple</button>
+                    
+                    
+                        <button onClick={() => setSearchParams({type: "luxury"})} className="van-type luxury ">Luxury</button>
+                    
+                    
+                        <button onClick={() => setSearchParams({type: "rugged"})} className="van-type rugged ">Rugged</button>
+                    
+                        <button onClick={() => setSearchParams({})} className="vanPg-tagElementClear luxury">Clear filters</button>
+                    
                 </div>
                 <div className="vanPg-cardContainer">
                     {vanElements}
