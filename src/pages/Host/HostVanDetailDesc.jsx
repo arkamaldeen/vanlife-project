@@ -4,7 +4,7 @@ export default function HostVanDetailDesc() {
 
     const {van} = useOutletContext()
 
-    console.log(van)
+    // console.log(van)
     return (
         <div className="hostVanDetailDesc">
             <h4>Name: <span>{van.name}</span></h4>

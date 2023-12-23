@@ -17,7 +17,7 @@ a {
 
 
 .content {
-  min-height: 90vh;
+  min-height: calc(100vh - 66px - 45px);
   background-color: #fff7ed;
 }
 
@@ -546,7 +546,99 @@ a {
   border-radius: 10px;
 }
 
+/* --------------------------NOTFOUND--------------------------- */
 
+.notfound {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.notfound > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  gap: 40px;
+}
+
+.notfound > div > h1 {
+  font-size: 32px;
+}
+
+.notfound > div > button {
+  padding: 20px 16px;
+  border: none;
+  background-color: #161616;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 100%;
+}
+
+
+/* --------------LOGIN-------------- */
+.login--container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 500px;
+  width: calc(100vw - 50px);
+}
+
+.login--container > h1 {
+  font-size: 2rem;
+  text-align: center;
+  color: #161616;
+  font-weight: 700;
+}
+
+.login--form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;    
+}
+
+.login--form > input {
+  border: 1px solid rgba(209, 213, 219);
+  height: 40px;
+  text-indent: 15px;
+  font-family: "Inter", sans-serif;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  font-weight: 400;
+}
+
+.login--form > input:focus {
+  outline: none;
+}
+
+.login--form > input:first-of-type {
+  border-radius: 6px 6px 0px 0px;
+}
+
+.login--form > input:last-of-type {
+  border-radius: 0px 0px 6px 6px;
+  border-top: none;
+}
+
+.login--form > button {
+  background-color: #FF8C38;
+  border: none;
+  border-radius: 6px;
+  height: 55px;
+  margin-top: 22px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+}
 
 
 
@@ -578,6 +670,7 @@ a {
 /* --------------MOBILE RESPONSIVE-------------- */
 
 @media (max-width: 825px) {
+  
   .homePg > div > section {
     height: 65%;
   }
@@ -613,6 +706,10 @@ a {
 }
 
 @media (max-width: 475px) {
+  .content {
+    min-height: calc(100 - 137px - 45px);
+  }
+
   .header {
     height: 15vh;
     display: flex;
@@ -724,6 +821,10 @@ a {
 
   .hostVanDetailDesc > h4 > span {
     font-size: 16px;
+  }
+
+  .notfound > div > h1 {
+    font-size: 25px;
   }
   
 }

@@ -1,21 +1,18 @@
-import { useEffect, useState } from "react"
-import { Link, NavLink, Outlet, useParams } from "react-router-dom"
+import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom"
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { getHostVans } from "../../api";
+import { requireAuth } from "../../util";
+
+export async function loader({params}) {
+    // console.log(params)
+    await requireAuth()
+    return getHostVans(params.vanId)
+} 
 
 export default function HostVanDetail() {
 
-    const [van, setVan] = useState({})
-
-    const params = useParams()
-    // console.log(params.vanId)
-
-    useEffect(() => {
-        fetch(`/api/host/vans/${params.vanId}`)
-            .then(res => res.json())
-            .then(data => setVan(data.vans[0]))
-    }, [params.vanId])
-
-    // console.log(van)
+    const vans = useLoaderData()
+    const van = vans[0]
 
     return (
         <div>

@@ -1,4 +1,5 @@
 import { Link  ,NavLink } from "react-router-dom"
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 function Header() {
 
@@ -10,6 +11,7 @@ function Header() {
                     <div className="nav-item"><NavLink to="/host" className={({ isActive }) => isActive ? "activeLink" : null}>Host</NavLink></div>
                     <div className="nav-item"><NavLink to="/about" className={({ isActive }) => isActive ? "activeLink" : null}>About</NavLink></div>
                     <div className="nav-item"><NavLink to="/vans" className={({ isActive }) => isActive ? "activeLink" : null}>Vans</NavLink></div>
+                    <div className="nav-item"><NavLink to="/login"><AccountCircleOutlinedIcon /></NavLink></div>
                 </div>
             </section>
         </div>
