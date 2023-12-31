@@ -588,7 +588,7 @@ a {
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  /* gap: 48px; */
   max-width: 500px;
   width: calc(100vw - 50px);
 }
@@ -598,6 +598,13 @@ a {
   text-align: center;
   color: #161616;
   font-weight: 700;
+  margin-bottom: 48px;
+}
+
+.login--container > h4 {
+  color: red;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .login--form {
@@ -628,8 +635,7 @@ a {
   border-radius: 0px 0px 6px 6px;
   border-top: none;
 }
-
-.login--form > button {
+.login--form > button  {
   background-color: #FF8C38;
   border: none;
   border-radius: 6px;
@@ -638,6 +644,12 @@ a {
   color: white;
   font-family: "Inter", sans-serif;
   font-size: 1rem;
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: #969696;
+  color: #161616;
 }
 
 

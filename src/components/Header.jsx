@@ -3,6 +3,10 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 
 function Header() {
 
+    function fakeLogOut() {
+        localStorage.removeItem("loggedin")
+    }
+
     return (
         <div className="header">
             <section>
@@ -12,6 +16,7 @@ function Header() {
                     <div className="nav-item"><NavLink to="/about" className={({ isActive }) => isActive ? "activeLink" : null}>About</NavLink></div>
                     <div className="nav-item"><NavLink to="/vans" className={({ isActive }) => isActive ? "activeLink" : null}>Vans</NavLink></div>
                     <div className="nav-item"><NavLink to="/login"><AccountCircleOutlinedIcon /></NavLink></div>
+                    <button onClick={fakeLogOut}>X</button>
                 </div>
             </section>
         </div>

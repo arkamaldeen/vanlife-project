@@ -3,16 +3,15 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { getHostVans } from "../../api";
 import { requireAuth } from "../../util";
 
-export async function loader({params}) {
+export async function loader({params, request}) {
     // console.log(params)
-    await requireAuth()
+    await requireAuth(request)
     return getHostVans(params.vanId)
 } 
 
 export default function HostVanDetail() {
 
-    const vans = useLoaderData()
-    const van = vans[0]
+    const van = useLoaderData()
 
     return (
         <div>

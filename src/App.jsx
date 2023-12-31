@@ -16,9 +16,8 @@ import HostVanDetailPrice from "./pages/Host/HostVanDetailPrice";
 import HostVanDetailPhotos from "./pages/Host/HostVanDetailPhotos";
 import NotFound from "./pages/NotFound";
 import Error from "./components/Error";
-import Login from "./pages/Login";
+import Login, {loader as loginLoader, action as loginAction } from "./pages/Login";
 import { requireAuth } from "./util";
-
 
 
 function App() {
@@ -30,7 +29,7 @@ function App() {
         <Route
           index
           element={<Dashboard />}
-          loader={async () => await requireAuth()}
+          loader={async ({request}) => await requireAuth(request)}
         />
         <Route
           path="vans"
@@ -40,12 +39,12 @@ function App() {
         <Route
           path="income"
           element={<Income />}
-          loader={async () => await requireAuth()}
+          loader={async ({request}) => await requireAuth(request)}
         />
         <Route
           path="reviews"
           element={<Reviews />}
-          loader={async () => await requireAuth()}
+          loader={async ({request}) => await requireAuth(request)}
         />
         <Route
           path='vans/:vanId'
@@ -55,17 +54,17 @@ function App() {
           <Route
             index
             element={<HostVanDetailDesc />}
-            loader={async () => await requireAuth()}
+            loader={async ({request}) => await requireAuth(request)}
           />
           <Route
             path="pricing"
             element={<HostVanDetailPrice />}
-            loader={async () => await requireAuth()}
+            loader={async ({request}) => await requireAuth(request)}
           />
           <Route
             path="photos"
             element={<HostVanDetailPhotos />}
-            loader={async () => await requireAuth()}
+            loader={async ({request}) => await requireAuth(request)}
           />
         </Route>
 
@@ -83,6 +82,8 @@ function App() {
       <Route
         path="login"
         element={<Login />}
+        loader={loginLoader}
+        action={loginAction}
       />
       <Route
         path="/vans/:id"
