@@ -6,7 +6,7 @@ function Header() {
 
     function fakeLogOut() {
         localStorage.removeItem("loggedin");
-        window.location.reload();
+        // window.location.reload();
     }
 
     return (

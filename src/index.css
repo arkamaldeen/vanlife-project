@@ -219,7 +219,7 @@ a > .homePg-button {
   margin-bottom: 32px;
 }
 
-.aboutPg-banner > button {
+.aboutPg-banner > a > button {
   border-radius: 10px;
   background: #161616;
   color: white;
