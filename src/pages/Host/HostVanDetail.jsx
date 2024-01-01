@@ -1,22 +1,22 @@
-import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom"
+import { Await, Link, NavLink, Outlet, defer, useLoaderData } from "react-router-dom"
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { getHostVans } from "../../api";
+import { getVan } from "../../api";
 import { requireAuth } from "../../util";
+import { Suspense } from "react";
 
-export async function loader({params, request}) {
+export async function loader({ params, request }) {
     // console.log(params)
     await requireAuth(request)
-    return getHostVans(params.vanId)
-} 
+    return defer({ hostVanDetail: getVan(params.vanId) })
+}
 
 export default function HostVanDetail() {
 
-    const van = useLoaderData()
+    const dataPromise = useLoaderData()
 
-    return (
-        <div>
-            <Link className="vanDetailPg-link" to=".." relative="path"><KeyboardBackspaceIcon className="vanDetailPg-arrow" />Back to all vans</Link>
-            <div className="hostVanDetail-container">
+    function renderHostVanDetail(van) {
+        return (
+            <>
                 <div className="hostVanDetail-overview">
                     <img src={van.imageUrl} alt="img" />
                     <div className="vanDetail-info">
@@ -43,7 +43,20 @@ export default function HostVanDetail() {
                         Photos
                     </NavLink>
                 </div>
-                <Outlet context={{van}}/>
+                <Outlet context={{ van }} />
+            </>
+        )
+    }
+
+    return (
+        <div>
+            <Link className="vanDetailPg-link" to=".." relative="path"><KeyboardBackspaceIcon className="vanDetailPg-arrow" />Back to all vans</Link>
+            <div className="hostVanDetail-container">
+                <Suspense fallback={<h2>Loading ...</h2>}>
+                    <Await resolve={dataPromise.hostVanDetail} >
+                        {renderHostVanDetail}
+                    </Await>
+                </Suspense>
             </div>
         </div>
 

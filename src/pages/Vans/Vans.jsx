@@ -1,39 +1,17 @@
 // import { useState } from "react";
-import { Link, useSearchParams, useLoaderData } from "react-router-dom";
+import { Suspense } from "react";
+import { Link, useSearchParams, useLoaderData, defer, Await } from "react-router-dom";
 import { getVans } from "../../api";
 
 export function loader() {
-    return getVans()
+    return defer({ vans: getVans() })
 }
 
 function Vans() {
 
     const [searchParams, setSearchParams] = useSearchParams()
-
-    const vans = useLoaderData() 
-    console.log(vans)
-
+    const dataPromise = useLoaderData()
     const typeFilter = searchParams.get("type")
-    
-    const displayedVans = typeFilter
-        ? vans.filter(van => van.type === typeFilter)
-        : vans
-
-    const vanElements = displayedVans.map(van => (
-        <div key={van.id} className="vanPg-card">
-            <Link
-                to={van.id}
-                state={{ search: `${searchParams.toString()}`, type: `${typeFilter}` }}
-            >
-                <img src={van.imageUrl} alt="" />
-                <div className="vanPg-cardInfo">
-                    <h3>{van.name}</h3>
-                    <p>${van.price}<span>/day</span></p>
-                </div>
-                <div className={`vanType ${van.type} selected`}>{van.type}</div>
-            </Link>
-        </div>
-    ));
 
     function handleFilterChange(key, value) {
         setSearchParams(prevParams => {
@@ -43,16 +21,34 @@ function Vans() {
             } else {
                 prevParams.set(key, value)
             }
-            console.log(prevParams)
+            // console.log(prevParams)
             return prevParams
         })
     }
 
-    return (
-        <div className="vanPg">
+    function renderVanElements(vans) {
+        const displayedVans = typeFilter
+            ? vans.filter(van => van.type === typeFilter)
+            : vans
 
-            <section>
-                <h1 className="vanPg-title">Explore our van options</h1>
+        const vanElements = displayedVans.map(van => (
+            <div key={van.id} className="vanPg-card">
+                <Link
+                    to={van.id}
+                    state={{ search: `${searchParams.toString()}`, type: `${typeFilter}` }}
+                >
+                    <img src={van.imageUrl} alt="" />
+                    <div className="vanPg-cardInfo">
+                        <h3>{van.name}</h3>
+                        <p>${van.price}<span>/day</span></p>
+                    </div>
+                    <div className={`vanType ${van.type} selected`}>{van.type}</div>
+                </Link>
+            </div>
+        ));
+
+        return (
+            <>
                 <div className="vanPg-tagDiv">
                     <button
                         onClick={() => handleFilterChange("type", "simple")}
@@ -82,6 +78,20 @@ function Vans() {
                 <div className="vanPg-cardContainer">
                     {vanElements}
                 </div>
+            </>
+        )
+    }
+
+    return (
+        <div className="vanPg">
+
+            <section>
+                <h1 className="vanPg-title">Explore our van options</h1>
+                <Suspense fallback={<h2 style={{marginTop: "32px"}} >Loading ...</h2>} >
+                    <Await resolve={dataPromise.vans} >
+                        {renderVanElements}
+                    </Await>
+                </Suspense>
             </section>
 
         </div>

@@ -1,10 +1,12 @@
 import { Link  ,NavLink } from "react-router-dom"
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Header() {
 
     function fakeLogOut() {
-        localStorage.removeItem("loggedin")
+        localStorage.removeItem("loggedin");
+        window.location.reload();
     }
 
     return (
@@ -16,7 +18,7 @@ function Header() {
                     <div className="nav-item"><NavLink to="/about" className={({ isActive }) => isActive ? "activeLink" : null}>About</NavLink></div>
                     <div className="nav-item"><NavLink to="/vans" className={({ isActive }) => isActive ? "activeLink" : null}>Vans</NavLink></div>
                     <div className="nav-item"><NavLink to="/login"><AccountCircleOutlinedIcon /></NavLink></div>
-                    <button onClick={fakeLogOut}>X</button>
+                    <div className="nav-item"><button style={{border: "None", background: "None", color: "#4d4d4d"}} onClick={fakeLogOut}><LogoutIcon /></button></div>
                 </div>
             </section>
         </div>
